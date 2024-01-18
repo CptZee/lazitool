@@ -10,7 +10,7 @@ use App\Models\Operation;
 
 class OperationController extends Controller
 {
-    public function showAll()
+    public function index()
     {
         return Operation::all();
     }

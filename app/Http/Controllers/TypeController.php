@@ -10,7 +10,7 @@ use App\Models\Type;
 
 class TypeController extends Controller
 {
-    public function showAll()
+    public function index()
     {
         return Type::all();
     }
@@ -24,7 +24,7 @@ class TypeController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'file_name' => 'required|string',
+                'name' => 'required|string',
             ]);
     
             return Type::create($validatedData);
@@ -39,7 +39,7 @@ class TypeController extends Controller
             $model = Type::findOrFail($id);
     
             $validatedData = $request->validate([
-                'file_name' => 'required|string',
+                'name' => 'required|string',
             ]);
     
             $model->update($validatedData);
