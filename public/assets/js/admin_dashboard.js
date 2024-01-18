@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
     $('#createTypeBtn').click(function () {
-        console.log('Button clicked');
+        $('#loadingModal').modal('toggle');
         $.ajax({
             url: 'http://localhost:8000/api/type',
             type: 'POST',
@@ -9,12 +9,14 @@ $(document).ready(function () {
             success: function (response) {
                 console.log('Successful AJAX call');
                 $('#responseModalBody').html(JSON.stringify(response, null, 2));
-                $('#responseModal').modal('show');
+                $('#loadingModal').modal('toggle');
+                $('#responseModal').modal('toggle');
             },
             error: function (error) {
                 console.log('Failed AJAX call: ' + JSON.stringify(error, null, 2));
                 $('#responseModalBody').html('Error: ' + JSON.stringify(error.responseJSON, null, 2));
-                $('#responseModal').modal('show');
+                $('#loadingModal').modal('toggle');
+                $('#responseModal').modal('toggle');
             }
         });
     });

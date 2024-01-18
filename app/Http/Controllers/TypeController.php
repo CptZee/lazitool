@@ -27,7 +27,14 @@ class TypeController extends Controller
                 'name' => 'required|string',
             ]);
     
-            return Type::create($validatedData);
+            $type = Type::create($validatedData);
+    
+            // Check if the creation was successful
+            if ($type) {
+                return response()->json(['message' => 'Successfully executed the operation']);
+            } else {
+                return response()->json(['error' => 'Failed to create the Type'], 422);
+            }
         } catch (ValidationException $e) {
             return response()->json(['error' => $e->errors()], 422);
         }
@@ -44,13 +51,13 @@ class TypeController extends Controller
     
             $model->update($validatedData);
     
-            return $model;
+            return response()->json(['message' => 'Successfully updated the Type']);
         } catch (ValidationException $e) {
             return response()->json(['error' => $e->errors()], 422);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         }
-    }
+    }    
 
     public function delete($id)
     {
