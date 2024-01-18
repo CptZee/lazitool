@@ -33,10 +33,10 @@ class TypeController extends Controller
             if ($type) {
                 return response()->json(['message' => 'Successfully executed the operation']);
             } else {
-                return response()->json(['error' => 'Failed to create the Type'], 422);
+                return response()->json(['message' => 'Failed to create the Type'], 422);
             }
         } catch (ValidationException $e) {
-            return response()->json(['error' => $e->errors()], 422);
+            return response()->json(['message' => $e->getMessage()], 422);
         }
     }
 
